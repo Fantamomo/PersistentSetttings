@@ -86,7 +86,7 @@
         <dependency>
             <groupId>com.fantamomo.persistent</groupId>
             <artifactId>persistent</artifactId>
-            <version>4.5-SNAPSHOT</version>
+            <version>5.2-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
