@@ -55,13 +55,13 @@ Replace `LATEST_VERSION` with the latest version.
 
 ### Creating a Settings Class
 
-Create a simple object that extends `at.leisner.persistent.settings.Settings`
+Create a simple **object** (recommended) that extends `at.leisner.persistent.settings.Settings`
 
 ```kotlin
 object MySettings : Settings()
 ```
 
-Note: It is not bound to `object`, but it is recommended.
+> Note: It is not bound to `object`, but they are required to have a name, so anonymous and locale are not allowed, this will lead to an exception. 
 
 If we want to add an entry for saving a username, we write:
 
