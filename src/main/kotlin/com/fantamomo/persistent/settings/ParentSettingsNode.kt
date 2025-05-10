@@ -27,7 +27,7 @@ sealed class ParentSettingsNode {
      */
     open val path: String by lazy {
         this::class.simpleName
-            ?: throw IllegalStateException("Implementation of ParentSettingsNode can not be anonymise")
+            ?: throw IllegalStateException("Implementation of ParentSettingsNode must not be anonymous")
     }
 
     /**
