@@ -46,7 +46,7 @@ sealed class ParentSettingsNode {
          */
         final override val path: String by lazy {
             "/" + this@ParentSettingsNode.path + (this::class.simpleName
-                ?: throw IllegalStateException("Implementation of SettingsNode can not be anonymise"))
+                ?: throw IllegalStateException("Implementation of ParentSettingsNode must not be anonymous"))
 
         }
     }
