@@ -4,6 +4,9 @@ import com.fantamomo.persistent.container.BufferedPersistentDataContainer
 import com.fantamomo.persistent.container.MutablePersistentDataContainer
 import com.fantamomo.persistent.container.toBuffered
 import com.fantamomo.persistent.serializer.SerializerStrategy
+import com.fantamomo.persistent.util.Snapshot
+import com.fantamomo.persistent.util.restore
+import com.fantamomo.persistent.util.snapshot
 import java.io.InputStream
 import java.io.OutputStream
 
@@ -27,6 +30,8 @@ abstract class Settings(
     input: InputStream? = null,
     serializer: SerializerStrategy = SerializerStrategy,
 ) : ParentSettingsNode() {
+
+    private var snapshot: Snapshot? = null
 
     /**
      * The [BufferedPersistentDataContainer] which contains all entries.
@@ -66,4 +71,12 @@ abstract class Settings(
      * Returns the [container] to the implemented class
      */
     protected fun getContainer(): BufferedPersistentDataContainer = container
+
+    protected fun createSnapshot() {
+        snapshot = container.snapshot()
+    }
+
+    protected fun restoreSnapshot() {
+        container.restore(snapshot ?: throw IllegalStateException("No snapshot to restore. Call createSnapshot first"))
+    }
 }
