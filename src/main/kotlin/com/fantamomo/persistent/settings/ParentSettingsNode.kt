@@ -11,6 +11,10 @@ import com.fantamomo.persistent.type.PersistentDataType
  * @since 1.0-SNAPSHOT
  */
 sealed class ParentSettingsNode {
+
+    init {
+        this::class.simpleName ?: throw IllegalStateException("Implementation of ParentSettingsNode must not be anonymous")
+    }
     /**
      * [Settings] instance of this hierarchy.
      *
@@ -26,8 +30,7 @@ sealed class ParentSettingsNode {
      * @throws IllegalStateException when it is implemented by a class which has no [kotlin.reflect.KClass.simpleName]
      */
     open val path: String by lazy {
-        this::class.simpleName
-            ?: throw IllegalStateException("Implementation of ParentSettingsNode must not be anonymous")
+        this::class.simpleName!!
     }
 
     /**
@@ -45,9 +48,7 @@ sealed class ParentSettingsNode {
          * Override [path] to complete the hierarchy.
          */
         final override val path: String by lazy {
-            "/" + this@ParentSettingsNode.path + (this::class.simpleName
-                ?: throw IllegalStateException("Implementation of ParentSettingsNode must not be anonymous"))
-
+            "/" + this@ParentSettingsNode.path + (this::class.simpleName!!)
         }
     }
 
