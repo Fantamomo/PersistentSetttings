@@ -20,6 +20,7 @@ import java.io.OutputStream
  * @param namespace The namespace of this settings, it is only recommended to set,
  * when the [BufferedPersistentDataContainer] is direct use with [com.fantamomo.persistent.container.copyTo].
  * @param input A [InputStream] where the settings should load of, it is optional to set, the [loadFrom] methode does the same.
+ * **Note:** on [input] the [InputStream.close] will be called
  * @param serializer A [SerializerStrategy] that defines how the data should load from [input]
  *
  * @author Fantamomo
@@ -41,6 +42,7 @@ abstract class Settings(
 
     init {
         input?.let { container.loadFrom(it, serializer) }
+        input?.close()
     }
 
     /**
