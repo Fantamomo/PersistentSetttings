@@ -15,8 +15,8 @@ import kotlin.reflect.KProperty
  */
 class SettingsEntry<P : Any, C : Any> internal constructor(
     internal val node: ParentSettingsNode,
-    internal val type: PersistentDataType<P, C>,
     internal var key: String? = null,
+    val type: PersistentDataType<P, C>,
     internal val default: () -> C,
 ) : ReadWriteProperty<ParentSettingsNode, C> {
 
