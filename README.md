@@ -161,25 +161,29 @@ object MySettings : Settings() {
 }
 ```
 
-To load settings, use the `loadFrom` method. If you want to call when you initialize the object, you can pass it to the constructor of `Settings`
-used:
+To load settings, use the `loadFrom` method.
+If you want to call it when you initialize the object, you can pass it to the constructor of `Settings`:
+Instate of writing the following:
 
 ```kotlin
 object MySettings : Settings() {
     init {
         val stream = Path("settings.dat").inputStream()
         loadFrom(stream)
+        stream.close()
     }
 }
 ```
 
-This is the same as:
+Write this:
 
 ```kotlin
 object MySettings : Settings(input = Path("settings.dat").inputStream()) {
     // ...
 }
 ```
+
+> **Note:** When init the settings via the constructor with a `InputStream` the `InputStream#close()` methode will automatically be called
 
 ## License
 
