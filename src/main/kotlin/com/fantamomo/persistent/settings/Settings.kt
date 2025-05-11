@@ -29,7 +29,7 @@ import java.io.OutputStream
 abstract class Settings(
     namespace: String = "",
     input: InputStream? = null,
-    serializer: SerializerStrategy = SerializerStrategy,
+    private val serializer: SerializerStrategy = SerializerStrategy,
 ) : ParentSettingsNode() {
 
     private var lastSnapshot: Snapshot? = null
@@ -58,14 +58,14 @@ abstract class Settings(
     /**
      * Delegates the call to [com.fantamomo.persistent.container.PersistentDataContainer.saveTo]
      */
-    protected fun saveTo(output: OutputStream, serializer: SerializerStrategy = SerializerStrategy) {
+    protected fun saveTo(output: OutputStream, serializer: SerializerStrategy = this.serializer) {
         container.saveTo(output, serializer)
     }
 
     /**
      * Delegates the call to [MutablePersistentDataContainer.loadFrom]
      */
-    protected fun loadFrom(input: InputStream, serializer: SerializerStrategy = SerializerStrategy) {
+    protected fun loadFrom(input: InputStream, serializer: SerializerStrategy = this.serializer) {
         container.loadFrom(input, serializer)
     }
 
