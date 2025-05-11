@@ -15,10 +15,13 @@ import kotlin.reflect.KProperty
  */
 class SettingsEntry<P : Any, C : Any> internal constructor(
     internal val node: ParentSettingsNode,
-    internal var key: String? = null,
     val type: PersistentDataType<P, C>,
+    key: String? = null,
     internal val default: () -> C,
 ) : ReadWriteProperty<ParentSettingsNode, C> {
+
+    var key: String? = key
+        internal set
 
     /**
      * The path where when saved the value should be saved and loaded
