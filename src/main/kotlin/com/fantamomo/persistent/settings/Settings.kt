@@ -32,7 +32,7 @@ abstract class Settings(
     serializer: SerializerStrategy = SerializerStrategy,
 ) : ParentSettingsNode() {
 
-    private var snapshot: Snapshot? = null
+    private var lastSnapshot: Snapshot? = null
 
     /**
      * The [BufferedPersistentDataContainer] which contains all entries.
@@ -74,11 +74,12 @@ abstract class Settings(
      */
     protected fun getContainer(): BufferedPersistentDataContainer = container
 
-    protected fun createSnapshot() {
-        snapshot = container.snapshot()
+    protected fun createSnapshot(): Snapshot {
+        lastSnapshot = container.snapshot()
+        return lastSnapshot!!
     }
 
-    protected fun restoreSnapshot() {
+    protected fun restoreSnapshot(snapshot: Snapshot? = lastSnapshot) {
         container.restore(snapshot ?: throw IllegalStateException("No snapshot to restore. Call createSnapshot first"))
     }
 }
